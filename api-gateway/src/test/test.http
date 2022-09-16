@@ -1,0 +1,11 @@
+###
+# curl --verbose -H 'Authorization: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJpZDEiLCJyb2xlIjoiUk9MRV9QQVJUTkVSIiwiZXhwIjoxNjYzMzMzMzg4LCJpYXQiOjE2NjMzMDQ1ODh9.QAZJh9-9x4XYBa1MIUH5wWtyrB0KPYDax5ZTfc7pbF4OroP2wU-bPaikH8zKms_O8jc05rR7-bM4zG0A1jun-A' http://localhost:9090/abc
+GET http://localhost:9090/abc?userId=abc
+Authorization: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJpZDEiLCJyb2xlIjoiUk9MRV9QQVJUTkVSIiwiZXhwIjoxNjYzMzMzMzg4LCJpYXQiOjE2NjMzMDQ1ODh9.QAZJh9-9x4XYBa1MIUH5wWtyrB0KPYDax5ZTfc7pbF4OroP2wU-bPaikH8zKms_O8jc05rR7-bM4zG0A1jun-A
+
+
+
+
+
+###
+

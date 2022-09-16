@@ -1,0 +1,61 @@
+server:
+  port: 9090
+
+spring:
+  redis:
+    host: localhost
+    port: 6379
+    database: 0
+  cloud:
+    gateway:
+      filter:
+        request-rate-limiter:
+          deny-empty-key: true
+      routes:
+#        - id: ncp
+#          uri: http://localhost:8888/
+#          predicates:
+#            - Path=/api/**
+#            - RemoteAddr= 192.168.1.1/24 ip제한
+
+        - id: test                        #predicates로 해당하는 애들을 uri로 매칭 시켜서 넘겨준다.
+          uri: http://localhost:9555/
+          predicates:
+            - Path=/**
+
+          filters:
+            - name: JwtAuthentication #factory 이름 규칙 GatewayFilterFactory 앞부분과 이름을 동일시 해야된다. 뒤에 있는 = 부분은 config class에 들어갈 값
+              args:
+                role: ROLE_PARTNER
+            - name: RequestRateLimiter
+              args:
+                key-resolver: "#{@userKeyResolver}"
+                redis-rate-limiter.replenishRate: 5 # 요청 드랍하지않고 사동안 허용할 용하자마다 허용할 초당 요청수 초마다 버킷 채우는량
+                redis-rate-limiter.burstCapacity: 60  # 사용자마다 1초최대 요청수
+                redis-rate-limiter.requestedTokens: 20 #한번에 뻐킷에 채울 토큰수 # 토큰 리메인을 최초값을 burstcapacity 초당 replenishrate만큼차고 Requesttoken만큼 버림
+
+
+
+
+management:
+  endpoint:
+    env:
+      post:
+        enabled: true
+
+
+  endpoints:
+    web:
+      exposure:
+        include:
+          - "*"
+    health:
+      show-details: always
+
+
+jwt:
+  secret: secret
+  expiration-second: 28800
+
+
+
